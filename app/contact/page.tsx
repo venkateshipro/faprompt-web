@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import ContactForm from "@/components/ContactForm";
 import { getGlobal, REVALIDATE } from "@/lib/wordpress";
 import { buildMetadata } from "@/lib/seo";
 
@@ -11,8 +12,6 @@ export const metadata: Metadata = buildMetadata({
   description: "Start a project with FaPrompt. Email hello@faprompt.com or use the form — we reply within two working days.",
   path: "/contact",
 });
-
-const SERVICE_CHIPS = ["AI Solutions", "Web Development", "Automation", "Branding", "Vector / Creative", "Support", "Anything else"];
 
 export default async function ContactPage() {
   const global = await getGlobal();
@@ -54,42 +53,7 @@ export default async function ContactPage() {
 
             {/* RIGHT: form */}
             <div className="reveal" data-delay="60" style={{ background: "var(--paper)", border: "1px solid var(--line)", borderRadius: "var(--radius-lg)", padding: "clamp(26px,3vw,38px)", boxShadow: "0 24px 60px -36px rgba(33,28,78,.4)" }}>
-              <form data-fp-form>
-                {/* honeypot — hidden from users, blocks bots */}
-                <input type="text" name="company_website" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} />
-                <div className="form-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 18px" }}>
-                  <div className="field"><label>Name <span className="req">*</span></label><input type="text" name="name" placeholder="Your name" required /></div>
-                  <div className="field"><label>Email <span className="req">*</span></label><input type="email" name="email" placeholder="you@company.com" required /></div>
-                </div>
-                <div className="form-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 18px" }}>
-                  <div className="field"><label>Company</label><input type="text" name="company" placeholder="Company / project" /></div>
-                  <div className="field"><label>Budget</label>
-                    <select name="budget" defaultValue="">
-                      <option value="">Select range</option>
-                      <option>Under ₹2L</option><option>₹2L – ₹5L</option><option>₹5L – ₹15L</option><option>₹15L+</option><option>Not sure yet</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="field">
-                  <label>What do you need? <span className="req">*</span></label>
-                  <div className="chips">
-                    {SERVICE_CHIPS.map((c) => (<span className="chip" key={c}>{c}</span>))}
-                  </div>
-                  <input type="hidden" name="services" defaultValue="" />
-                </div>
-                <div className="field"><label>Tell us about it <span className="req">*</span></label><textarea name="message" placeholder="A few lines about your idea, timeline and goals…" required></textarea></div>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap", marginTop: 4 }}>
-                  <span className="form-note">We&apos;ll reply within 2 working days.</span>
-                  <button type="submit" className="btn btn-primary btn-arrow">Send message
-                    <span className="btn-arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
-                  </button>
-                </div>
-                <div className="form-success" style={{ display: "none", alignItems: "center", gap: 10, marginTop: 20, padding: "14px 16px", borderRadius: 11, background: "var(--soft)", color: "var(--secondary)", fontSize: 14 }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
-                  Thanks — your message is in. We&apos;ll be in touch shortly.
-                </div>
-                <div className="form-error" style={{ display: "none", alignItems: "center", gap: 10, marginTop: 20, padding: "14px 16px", borderRadius: 11, background: "#FDECEC", color: "#C0392B", fontSize: 14 }} />
-              </form>
+              <ContactForm />
             </div>
           </div>
         </div>
