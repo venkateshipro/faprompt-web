@@ -1,0 +1,17 @@
+query Projects {
+  projects(first: 50, where: { orderby: { field: MENU_ORDER, order: ASC } }) {
+    nodes {
+      slug
+      title
+      projectFields {
+        category
+        caseLabel
+        summary
+        coverFrom
+        coverTo
+        results { result }
+        coverImage { node { sourceUrl altText } }
+      }
+    }
+  }
+}

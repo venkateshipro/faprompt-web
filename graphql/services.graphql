@@ -1,0 +1,34 @@
+query Services {
+  services(first: 50, where: { orderby: { field: MENU_ORDER, order: ASC } }) {
+    nodes {
+      slug
+      title
+      serviceFields {
+        number
+        icon
+        excerpt
+        description
+        features { feature }
+        cta
+      }
+      seo { title metaDesc canonical opengraphImage { sourceUrl } }
+    }
+  }
+}
+
+query ServiceBySlug($slug: ID!) {
+  service(id: $slug, idType: SLUG) {
+    slug
+    title
+    serviceFields {
+      number
+      icon
+      excerpt
+      description
+      features { feature }
+      cta
+      sections { heading intro items { title text } }
+    }
+    seo { title metaDesc canonical opengraphImage { sourceUrl } }
+  }
+}

@@ -1,0 +1,34 @@
+query PageBySlug($slug: ID!) {
+  page(id: $slug, idType: URI) {
+    slug
+    title
+    content
+    seo { title metaDesc canonical opengraphImage { sourceUrl } }
+  }
+}
+
+query Testimonials {
+  testimonials(first: 50) {
+    nodes {
+      title
+      testimonialFields { name role quote }
+    }
+  }
+}
+
+query GlobalSettings {
+  globalSettings {
+    siteFields {
+      email
+      website
+      location
+      tagline
+      motto
+      legalName
+      ctaLabel
+      nav { label url }
+      footerServices { label url }
+      social { label url }
+    }
+  }
+}
